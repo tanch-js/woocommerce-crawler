@@ -83,6 +83,7 @@ const todayISOString = new Date().toISOString().slice(0, 10);
         );
       }
     }
+    console.log(`image upload for ${dailyPackages.length} daily packages completed.`)
   } catch (error) {
     console.log(error);
   }
