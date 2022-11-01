@@ -78,7 +78,7 @@ const todayISOString = new Date().toISOString().slice(0, 10);
             )}`,
           },
           function (error, result) {
-            console.log(result);
+            // console.log(result);
           }
         );
       }
