@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const cloudinary = require("cloudinary");
-require('dotenv').config()
+require("dotenv").config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -12,7 +12,9 @@ const todayISOString = new Date().toISOString().slice(0, 10);
 
 (async () => {
   try {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
     await page.goto(
       "https://woocenter.azurewebsites.net/Identity/Account/Login?ReturnUrl=%2FTask%2FIndex"
@@ -71,6 +73,8 @@ const todayISOString = new Date().toISOString().slice(0, 10);
         cloudinary.v2.uploader.upload(
           image,
           {
+            use_filename: true,
+            unique_filename: false,
             overwrite: false,
             folder: `${todayISOString}/${order.orderId}_${order.name.replace(
               " ",
@@ -83,7 +87,9 @@ const todayISOString = new Date().toISOString().slice(0, 10);
         );
       }
     }
-    console.log(`image upload for ${dailyPackages.length} daily packages completed.`)
+    console.log(
+      `image upload for ${dailyPackages.length} daily packages completed.`
+    );
   } catch (error) {
     console.log(error);
   }
